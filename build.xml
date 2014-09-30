@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- WARNING: Eclipse auto-generated file.
+              Any modifications will be overwritten.
+              To include a user specific buildfile here, simply create one in the same
+              directory with the processing instruction <?eclipse.ant.import?>
+              as the first entry and export the buildfile again. --><project basedir="." default="build" name="POS">
+    <property environment="env"/>
+    <property name="debuglevel" value="source,lines,vars"/>
+    <property name="target" value="1.7"/>
+    <property name="source" value="1.7"/>
+    <path id="POS.classpath">
+        <pathelement location="bin"/>
+    	<pathelement location="lib"/>
+    </path>
+    <target name="init">
+        <mkdir dir="bin"/>
+        <copy includeemptydirs="false" todir="bin">
+            <fileset dir="src">
+                <exclude name="**/*.java"/>
+            </fileset>
+        </copy>
+   	</target>
+   	<target name="bump-revision">
+    	<propertyfile file="version.properties">
+    		<entry key="build.revision.number" default="0" type="int" operation="+" value="1"/>
+    	</propertyfile>
+    	
+    	<property file="version.properties" relative="true"/>
+    	<propertyfile file="version.properties">
+    		<entry key="build.number" operation="=" value="${build.major.number}.${build.minor.number}.${build.revision.number}" />
+    	</propertyfile>
+    </target>
+    <target name="clean">
+        <delete dir="bin"/>
+    </target>
+	<target name="run" depends="build">
+		<java classname="ee.ut.math.tvt.qrpth.Intro">
+			<classpath refid="POS.classpath"/>
+		</java>
+	</target>
+    <target depends="clean" name="cleanall"/>
+    <target depends="build-subprojects,build-project" name="build"/>
+    <target name="build-subprojects"/>
+    <target depends="init" name="build-project">
+        <javac debug="true" debuglevel="${debuglevel}" destdir="bin" includeantruntime="false" source="${source}" target="${target}">
+            <src path="src"/>
+            <classpath refid="POS.classpath"/>
+        </javac>
+    </target>
+    <target description="Build all projects which reference this project. Useful to propagate changes." name="build-refprojects"/>
+    <target description="copy Eclipse compiler jars to ant lib directory" name="init-eclipse-compiler">
+        <copy todir="${ant.library.dir}">
+            <fileset dir="${ECLIPSE_HOME}/plugins" includes="org.eclipse.jdt.core_*.jar"/>
+        </copy>
+        <unzip dest="${ant.library.dir}">
+            <patternset includes="jdtCompilerAdapter.jar"/>
+            <fileset dir="${ECLIPSE_HOME}/plugins" includes="org.eclipse.jdt.core_*.jar"/>
+        </unzip>
+    </target>
+    <target description="compile project with Eclipse compiler" name="build-eclipse-compiler">
+        <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
+        <antcall target="build"/>
+    </target>
+	<target name="dist" depends="build,bump-revision">
+		<mkdir dir="build/jar"/>
+		<jar destfile="build/jar/qrpth.jar">
+			<fileset dir="bin" />
+			
+			<fileset dir=".">
+				<exclude name="**"/>
+			</fileset>
+			
+			<fileset dir=".">
+				<include name="version.properties"/>
+				<include name="application.properties"/>
+			</fileset>
+
+		     <archives>
+		       <zips>
+		         <fileset dir="lib" includes="**/*.jar"/>
+		       </zips>
+		     </archives>
+			
+			<manifest>
+				<attribute name="Main-Class" value="ee.ut.math.tvt.qrpth.Intro"/>
+			</manifest>
+		</jar>
+	</target>
+	<target name="jrun" depends="dist">
+		<java jar="build/jar/qrpth.jar" fork="true"/>
+	</target>
+</project>
