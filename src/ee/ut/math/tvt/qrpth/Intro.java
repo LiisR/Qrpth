@@ -6,7 +6,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+//import org.apache.log4j.Logger;
+
+import ee.ut.math.tvt.qrpth.IntroUI;
+
 public class Intro {
+	//private static final Logger log = Logger.getLogger(Intro.class);
+	
 	@SuppressWarnings("resource")
 	static InputStream getResource(String name) throws FileNotFoundException {
 		InputStream stream = Intro.class.getResourceAsStream("/" + name);
@@ -24,5 +30,13 @@ public class Intro {
 				prop.getProperty("build.minor.number") + "." + prop.getProperty("build.revision.number"));
 		
 		System.out.println(prop.getProperty("build.number"));
+		
+		final IntroUI ui = new IntroUI();
+		ui.setVisible(true);
+		
+		
+		//log.info("Team intro started");
+		
 	}
+	
 }
