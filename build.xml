@@ -10,7 +10,9 @@
     <property name="source" value="1.7"/>
     <path id="POS.classpath">
         <pathelement location="bin"/>
-    	<pathelement location="lib"/>
+    	<pathelement location="lib/log4j-api-2.0.2.jar"/>
+        <pathelement location="lib/log4j-core-2.0.2.jar"/>
+        <pathelement location="."/>
     </path>
     <target name="init">
         <mkdir dir="bin"/>
@@ -34,7 +36,7 @@
         <delete dir="bin"/>
     </target>
 	<target name="run" depends="build">
-		<java classname="ee.ut.math.tvt.qrpth.Intro">
+		<java classname="ee.ut.math.tvt.qrpth.Intro" fork="true">
 			<classpath refid="POS.classpath"/>
 		</java>
 	</target>
@@ -73,6 +75,8 @@
 			<fileset dir=".">
 				<include name="version.properties"/>
 				<include name="application.properties"/>
+                                <include name="log4j2.xml"/>
+                                <include name="image/**"/>
 			</fileset>
 
 		     <archives>

@@ -1,7 +1,5 @@
 package ee.ut.math.tvt.qrpth;
 
-import com.jgoodies.looks.windows.WindowsLookAndFeel;
-
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
@@ -15,7 +13,15 @@ import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
-//import org.apache.log4j.Logger;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+
+import java.util.Properties;
+
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 /**
 * Graphical user interface of the sales system.
@@ -25,7 +31,7 @@ public class IntroUI extends JFrame {
 	 
 	  private static final long serialVersionUID = 1L;
 
-	  //private static final Logger log = Logger.getLogger(IntroUI.class);
+	  private Logger log = LogManager.getLogger(IntroUI.class);
 
 	  /**
 	   * Constructs sales system GUI.
@@ -34,14 +40,6 @@ public class IntroUI extends JFrame {
 	  public IntroUI() {
 	    
 	    setTitle("Intro of Qrpth");
-
-	    // set L&F to the nice Windows style
-	    try {
-	      UIManager.setLookAndFeel(new WindowsLookAndFeel());
-
-	    } catch (UnsupportedLookAndFeelException e1) {
-	      //log.warn(e1.getMessage());
-	    }
 
 	    drawWidgets();
 	    
@@ -63,12 +61,32 @@ public class IntroUI extends JFrame {
 	  }
 
 	  private void drawWidgets() {
-		  ImageIcon icon = new ImageIcon("image/pilt.png");
+                  Properties verinfo = null;
+                try {
+                    verinfo = Intro.getProperties("version");
+                } catch (Exception e) {
+                    this.log.fatal("Failed to read `version.properties`", e);
+                    System.exit(1);
+                }
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                try {
+                    InputStream res = Intro.getResource("image/pilt.png");
+                    byte[] buffer = new byte[1024];
+                    int length = 0;
+                    while ((length = res.read(buffer)) != -1) {
+                        baos.write(buffer, 0, length);
+                    }
+                } catch (Exception e) {
+                    this.log.fatal("Failed to read `image/pilt.png`", e);
+                    System.exit(1);
+                }
+                
+		  ImageIcon icon = new ImageIcon(baos.toByteArray());
 		  JLabel text = new JLabel("<html><b>Team name:</b> Qrpth <br>"+
 		  		  "<b>Team leader:</b> <br>"+ 
 				  "<b>Team leader email:</b> <br>"+ 
-				  "<b>Team members:</b> Liis Reisberg, Anne-Mai Ilum‰e, Andreas Ots, Robert Laur <br>"+
-				  "<b>Software version number: Eclipse Kepler, jdk 1.7.0_51 </b>"+ 
+				  "<b>Team members:</b> Liis Reisberg, Anne-Mai Ilum√§e, Andreas Ots, Robert Laur <br>"+
+				  "<b>Software version number: "+verinfo.getProperty("build.number") + "</b>"+ 
 				  "</html>",icon,JLabel.LEFT);
 		  
 		  getContentPane().add(text);
