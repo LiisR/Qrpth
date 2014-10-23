@@ -32,7 +32,7 @@ public class IntroUI extends JFrame {
 	  private static final long serialVersionUID = 1L;
 
 	  private Logger log = LogManager.getLogger(IntroUI.class);
-
+ 
 	  /**
 	   * Constructs sales system GUI.
 	   * @param domainController Sales domain controller.

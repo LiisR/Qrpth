@@ -1,7 +1,7 @@
 package ee.ut.math.tvt.salessystem.ui.model;
 
 import java.util.NoSuchElementException;
-
+ 
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 
