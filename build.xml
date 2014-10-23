@@ -100,5 +100,71 @@
 		<arg value="console" />
 	</java>
 </target>
+
+<!-- GitHub macro, http://tlrobinson.net/blog/2008/11/ant-tasks-for-git/ -->
+<macrodef name = "git">
+     <attribute name = "command" />
+     <attribute name = "dir" default = "" />
+     <element name = "args" optional = "true" />
+     <sequential>
+         <echo message = "git @{command}" />
+         <exec executable = "git" dir = "@{dir}">
+             <arg value = "@{command}" />
+             <args/>
+         </exec>
+     </sequential>
+</macrodef>
+
+<!-- GitHub, commit and push -->
+<target name="git_commit" description="Commits and pushes changes to HitHub">
+    <input message="Commit message" addproperty="commit-message" />		
+		<echo message="Commiting all changes with message ${commit-message}" />
+		
+		<git command="add">
+			<args>
+					<arg value="-A" />
+			</args>
+		</git>
+		
+		<git command="commit">
+			<args>
+				<arg value="-am ${commit-message}" />
+			</args>
+		</git>
+		
+		<input message="username" addproperty="github_username" />
+		<input message="password" addproperty="github_password" />
+			
+		<git command="push" >
+			<args>
+				<arg value="https://${github_username}:${github_password}@github.com/LiisR/Qrpth.git"/>
+			</args>
+		</git>
+</target>
+
+<!-- GitHub tag -->
+<target name="git_tag" description="Creates GitHub tag">
+	<input message="Tag name" addproperty="tag-name" />
+	<input message="Tag comment" addproperty="tag-comment" />
+	<input message="username" addproperty="github_username" />
+	<input message="password" addproperty="github_password" />
+			
+	<echo message="Adding tag '${tag-name}'" />
+			
+	<git command="tag">
+		<args>
+			<arg value="-a" />
+			<arg value="${tag-name}" />
+			<arg value="-m ${tag-comment}" />
+		</args>
+	</git>
+			
+	<git command="push" >
+		<args>
+			<arg value="--tags" />
+			<arg value="https://${github_username}:${github_password}@github.com/LiisR/Qrpth.git"/>
+		</args>
+	</git>
+</target>
 	
 </project>

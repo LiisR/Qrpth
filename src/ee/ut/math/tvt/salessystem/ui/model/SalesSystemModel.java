@@ -2,7 +2,7 @@ package ee.ut.math.tvt.salessystem.ui.model;
 
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
-
+ 
 import ee.ut.math.tvt.salessystem.domain.controller.SalesDomainController;
 
 /**
