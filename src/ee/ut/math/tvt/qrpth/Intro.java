@@ -18,7 +18,7 @@ public class Intro {
 	private static final Logger log = LogManager.getLogger(Intro.class);
 	private static final String MODE = "console";
 
-
+ 
 	
 	@SuppressWarnings("resource")
 	static InputStream getResource(String name) throws FileNotFoundException {

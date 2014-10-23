@@ -125,7 +125,7 @@
 					<arg value="-A" />
 			</args>
 		</git>
-		
+	 	
 		<git command="commit">
 			<args>
 				<arg value="-am ${commit-message}" />

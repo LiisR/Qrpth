@@ -7,7 +7,7 @@ import ee.ut.math.tvt.salessystem.ui.model.SalesSystemModel;
 import ee.ut.math.tvt.salessystem.ui.tabs.HistoryTab;
 import ee.ut.math.tvt.salessystem.ui.tabs.PurchaseTab;
 import ee.ut.math.tvt.salessystem.ui.tabs.StockTab;
-
+ 
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;

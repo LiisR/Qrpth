@@ -4,7 +4,7 @@ import java.util.NoSuchElementException;
  
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
-
+ 
 import ee.ut.math.tvt.salessystem.domain.data.StockItem;
 
 /**

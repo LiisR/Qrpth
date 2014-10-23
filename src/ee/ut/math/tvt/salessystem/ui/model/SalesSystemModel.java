@@ -4,7 +4,7 @@ import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
  
 import ee.ut.math.tvt.salessystem.domain.controller.SalesDomainController;
-
+ 
 /**
  * Main model. Holds all the other models.
  */

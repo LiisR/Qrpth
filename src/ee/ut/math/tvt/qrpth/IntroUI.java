@@ -26,7 +26,7 @@ import org.apache.logging.log4j.LogManager;
 /**
 * Graphical user interface of the sales system.
 */
-
+ 
 public class IntroUI extends JFrame {
 	 
 	  private static final long serialVersionUID = 1L;
