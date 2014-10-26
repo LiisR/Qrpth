@@ -19,6 +19,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.JOptionPane;
+import javax.swing.JComboBox;
 
 /**
  * Purchase pane + shopping cart tabel UI.
@@ -29,6 +31,7 @@ public class PurchaseItemPanel extends JPanel {
 
     // Text field on the dialogPane
     private JTextField barCodeField;
+    private JComboBox barCodeBox;
     private JTextField quantityField;
     private JTextField nameField;
     private JTextField priceField;
@@ -78,11 +81,12 @@ public class PurchaseItemPanel extends JPanel {
 
         // Create the panel
         JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(5, 2));
+        panel.setLayout(new GridLayout(6, 2));
         panel.setBorder(BorderFactory.createTitledBorder("Product"));
 
         // Initialize the textfields
         barCodeField = new JTextField();
+        barCodeBox = new JComboBox();
         quantityField = new JTextField("1");
         nameField = new JTextField();
         priceField = new JTextField();
@@ -101,6 +105,9 @@ public class PurchaseItemPanel extends JPanel {
         priceField.setEditable(false);
 
         // == Add components to the panel
+        // bar code box
+        panel.add(new JLabel("Product:"));
+        panel.add(barCodeBox); 
 
         // - bar code
         panel.add(new JLabel("Bar code:"));
@@ -156,6 +163,7 @@ public class PurchaseItemPanel extends JPanel {
             return null;
         }
     }
+    
 
     /**
      * Add new item to the cart.
@@ -170,8 +178,12 @@ public class PurchaseItemPanel extends JPanel {
             } catch (NumberFormatException ex) {
                 quantity = 1;
             }
-            model.getCurrentPurchaseTableModel()
-                .addItem(new SoldItem(stockItem, quantity));
+            if(quantity <= stockItem.getQuantity()){
+            	model.getCurrentPurchaseTableModel()
+                	.addItem(new SoldItem(stockItem, quantity));
+            }else{
+            	JOptionPane.showMessageDialog(null, "Can not add item to cart. Warehouse has less items.","Error", JOptionPane.INFORMATION_MESSAGE);
+            }
         }
     }
 
@@ -180,6 +192,7 @@ public class PurchaseItemPanel extends JPanel {
      */
     @Override
     public void setEnabled(boolean enabled) {
+    	this.barCodeBox.setEnabled(enabled);
         this.addItemButton.setEnabled(enabled);
         this.barCodeField.setEnabled(enabled);
         this.quantityField.setEnabled(enabled);
