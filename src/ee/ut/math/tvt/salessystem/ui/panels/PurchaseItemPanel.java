@@ -36,7 +36,7 @@ public class PurchaseItemPanel extends JPanel {
 
     // Text field on the dialogPane
     private JTextField barCodeField;
-    private JComboBox barCodeBox;
+    //private JComboBox barCodeBox; yleliigne??
     private JTextField quantityField;
     //private JTextField nameField;
     private JTextField priceField;
@@ -104,7 +104,7 @@ public class PurchaseItemPanel extends JPanel {
 
         // Initialize the textfields
         barCodeField = new JTextField();
-        barCodeBox = new JComboBox();
+      // barCodeBox = new JComboBox(); - yleliigne?
         quantityField = new JTextField("1");
         //nameField = new JTextField();
         priceField = new JTextField();
@@ -130,7 +130,7 @@ public class PurchaseItemPanel extends JPanel {
         panel.add(combobox);
 
         // bar code box
-        panel.add(new JLabel("Product:"));
+        //panel.add(new JLabel("Product:"));
 //???
 //        panel.add(barCodeBox); 
 
