@@ -23,6 +23,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.JOptionPane;
+import javax.swing.JComboBox;
 
 
 /**
@@ -34,6 +36,7 @@ public class PurchaseItemPanel extends JPanel {
 
     // Text field on the dialogPane
     private JTextField barCodeField;
+    private JComboBox barCodeBox;
     private JTextField quantityField;
     //private JTextField nameField;
     private JTextField priceField;
@@ -101,6 +104,7 @@ public class PurchaseItemPanel extends JPanel {
 
         // Initialize the textfields
         barCodeField = new JTextField();
+        barCodeBox = new JComboBox();
         quantityField = new JTextField("1");
         //nameField = new JTextField();
         priceField = new JTextField();
@@ -120,10 +124,16 @@ public class PurchaseItemPanel extends JPanel {
         priceField.setEditable(false);
 
         // == Add components to the panel
-        
+
         //-Jcombobox
         panel.add(new JLabel("Drop-down menu:"));
         panel.add(combobox);
+
+        // bar code box
+        panel.add(new JLabel("Product:"));
+//???
+//        panel.add(barCodeBox); 
+
 
         // - bar code
         panel.add(new JLabel("Bar code:"));
@@ -179,19 +189,20 @@ public class PurchaseItemPanel extends JPanel {
         try {
             int code = Integer.parseInt(barCodeField.getText());
             return model.getWarehouseTableModel().getItemById(code);
-        } catch (NumberFormatException ex) {
+        } catch (NumberFormatException e) {
             return null;
-        } catch (NoSuchElementException ex) {
+        } catch (NoSuchElementException e) {
             return null;
         }
     }
+
    //comboboxi s6na v6rdlemine warehousemodelist getStockItemByName
     private StockItem getStockItemByName() {
         try {
         	String name = (String)combobox.getSelectedItem();
         	return model.getWarehouseTableModel().getItemByName(name);
         } 
-       catch (NoSuchElementException ex) {
+       catch (NoSuchElementException e) {
             return null;
         }
     }
@@ -209,8 +220,12 @@ public class PurchaseItemPanel extends JPanel {
             } catch (NumberFormatException ex) {
                 quantity = 1;
             }
-            model.getCurrentPurchaseTableModel()
-                .addItem(new SoldItem(stockItem, quantity));
+            if(quantity <= stockItem.getQuantity()){
+            	model.getCurrentPurchaseTableModel()
+                	.addItem(new SoldItem(stockItem, quantity));
+            }else{
+            	JOptionPane.showMessageDialog(null, "Can not add item to cart. Warehouse has less items.","Error", JOptionPane.INFORMATION_MESSAGE);
+            }
         }
     }
 
@@ -219,7 +234,11 @@ public class PurchaseItemPanel extends JPanel {
      */
     @Override
     public void setEnabled(boolean enabled) {
+
     	this.combobox.setEnabled(enabled);
+
+    	//this.barCodeBox.setEnabled(enabled);
+
         this.addItemButton.setEnabled(enabled);
         this.quantityField.setEnabled(enabled);
     }
