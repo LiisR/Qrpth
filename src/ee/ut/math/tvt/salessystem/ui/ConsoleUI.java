@@ -35,7 +35,7 @@ public class ConsoleUI {
 		cart = new ArrayList<StockItem>();
 		warehouse = new ArrayList<StockItem>();
 	}
-
+	
 	/**
 	 * Run the sales system CLI.
 	 */

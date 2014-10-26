@@ -83,9 +83,9 @@ public class IntroUI extends JFrame {
                 
 		  ImageIcon icon = new ImageIcon(baos.toByteArray());
 		  JLabel text = new JLabel("<html><b>Team name:</b> Qrpth <br>"+
-		  		  "<b>Team leader:</b> <br>"+ 
-				  "<b>Team leader email:</b> <br>"+ 
-				  "<b>Team members:</b> Liis Reisberg, Anne-Mai Ilumäe, Andreas Ots, Robert Laur <br>"+
+		  		  "<b>Team leader:</b> Anne-Mai Ilumae<br>"+ 
+				  "<b>Team leader email:</b>ami@ut.ee <br>"+ 
+				  "<b>Team members:</b> Liis Reisberg, Anne-Mai Ilum��e, Andreas Ots, Robert Laur <br>"+
 				  "<b>Software version number: "+verinfo.getProperty("build.number") + "</b>"+ 
 				  "</html>",icon,JLabel.LEFT);
 		  

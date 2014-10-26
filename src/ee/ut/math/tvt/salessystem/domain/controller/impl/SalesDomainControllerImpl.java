@@ -37,12 +37,14 @@ public class SalesDomainControllerImpl implements SalesDomainController {
 		StockItem chupaChups = new StockItem(2l, "Chupa-chups", "Sweets", 8.0, 8);
 	    StockItem frankfurters = new StockItem(3l, "Frankfurters", "Beer sauseges", 15.0, 12);
 	    StockItem beer = new StockItem(4l, "Free Beer", "Student's delight", 0.0, 100);
-
+	    StockItem jama = new StockItem(5l, "Free jama", "Student's delight", 7.0, 100);
 		dataset.add(chips);
 		dataset.add(chupaChups);
 		dataset.add(frankfurters);
 		dataset.add(beer);
-		
+		dataset.add(jama);
+
 		return dataset;
 	}
 }
+

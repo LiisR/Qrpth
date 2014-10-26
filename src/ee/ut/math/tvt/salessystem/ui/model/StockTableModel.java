@@ -1,10 +1,14 @@
 package ee.ut.math.tvt.salessystem.ui.model;
 
+import java.util.List;
+import java.util.ArrayList;
 import java.util.NoSuchElementException;
  
+
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
  
+
 import ee.ut.math.tvt.salessystem.domain.data.StockItem;
 
 /**
@@ -72,5 +76,14 @@ public class StockTableModel extends SalesSystemTableModel<StockItem> {
 
 		return buffer.toString();
 	}
+	
+    public List<String> inventoryList() {
+        final List<String> names = new ArrayList<String>();
+        for (final StockItem stockItem : rows) {
+                names.add(stockItem.getName());
+        }
+        return names;
+}
+
 
 }

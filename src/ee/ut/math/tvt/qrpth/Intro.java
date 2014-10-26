@@ -35,6 +35,7 @@ public class Intro {
 	
 	public static void main(String[] args) throws FileNotFoundException, IOException {
 		final SalesDomainController domainController = new SalesDomainControllerImpl();
+	
 		
 		
 		if (args.length == 1 && args[0].equals(MODE)) {
@@ -64,6 +65,7 @@ public class Intro {
 			introUI.setVisible(false);
 			 
 		}
+		
 		
 		
 	}
