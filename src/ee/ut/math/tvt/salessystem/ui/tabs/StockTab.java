@@ -1,17 +1,28 @@
 package ee.ut.math.tvt.salessystem.ui.tabs;
 
 import ee.ut.math.tvt.salessystem.ui.model.SalesSystemModel;
+import ee.ut.math.tvt.salessystem.domain.data.StockItem;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dialog;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.JTableHeader;
-
+import javax.swing.JDialog;
+import javax.swing.JTextField;
+import javax.swing.JFormattedTextField;
+import javax.swing.JLabel;
+import java.text.DecimalFormat;
+import javax.swing.text.NumberFormatter;
 
 public class StockTab {
 
@@ -48,7 +59,7 @@ public class StockTab {
 
   // warehouse menu
   private Component drawStockMenuPane() {
-    JPanel panel = new JPanel();
+    final JPanel panel = new JPanel();
 
     GridBagConstraints gc = new GridBagConstraints();
     GridBagLayout gb = new GridBagLayout();
@@ -59,6 +70,16 @@ public class StockTab {
     gc.weightx = 0;
 
     addItem = new JButton("Add");
+    addItem.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+            JDialog dialog = new JDialog((Dialog)null, "Add product", true);
+            dialog.add(drawAddPopup());
+            dialog.setSize(360, 240);
+            Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
+            dialog.setLocation((screen.width - 360) / 2, (screen.height - 240) / 2);
+            dialog.setVisible(true);
+        }
+    });
     gc.gridwidth = GridBagConstraints.RELATIVE;
     gc.weightx = 1.0;
     panel.add(addItem, gc);
@@ -92,4 +113,64 @@ public class StockTab {
     return panel;
   }
 
+  private Component drawAddPopup() {
+      JPanel panel = new JPanel();
+
+      GridBagConstraints gc = new GridBagConstraints();
+      GridBagLayout gb = new GridBagLayout();
+
+      panel.setLayout(gb);
+
+      final JLabel[] labels = {
+          new JLabel("Barcode: "),
+          new JLabel("Name: "),
+          new JLabel("Price: "),
+          new JLabel("Quantity: "),
+      };
+
+      final JTextField[] textFields = {
+          new JFormattedTextField(),
+          new JTextField(10),
+          new JFormattedTextField(),
+          new JFormattedTextField(),
+      };
+// Te ei maksa mulle piisavalt.
+//      ((JFormattedTextField) textFields[0]).setValue(new Long(0));
+//      ((JFormattedTextField) textFields[2]).setValue(new Double(0.0));
+//      ((JFormattedTextField) textFields[3]).setValue(new Integer(0));
+
+      int numLabels = labels.length;
+      
+      for (int i = 0; i < numLabels; i++) {
+          labels[i].setLabelFor(textFields[i]);
+
+          gc.gridwidth = GridBagConstraints.RELATIVE; //next-to-last
+          gc.fill = GridBagConstraints.NONE;      //reset to default
+          gc.weightx = 0.0;                       //reset to default
+          panel.add(labels[i], gc);
+          
+          gc.gridwidth = GridBagConstraints.REMAINDER;     //end row
+          gc.fill = GridBagConstraints.HORIZONTAL;
+          gc.weightx = 1.0;
+          panel.add(textFields[i], gc);
+      }
+
+      JButton smurfAbstractSmurfAddSmurfSmurfFactoryAbstractFactory = new JButton("Add");
+      smurfAbstractSmurfAddSmurfSmurfFactoryAbstractFactory.addActionListener(new ActionListener() {
+          public void actionPerformed(ActionEvent e) {
+              model.getWarehouseTableModel().addItem(
+                      new StockItem(
+                          Long.parseLong(textFields[0].getText()),
+                          textFields[1].getText(),
+                          "",
+                          Double.parseDouble(textFields[2].getText()),
+                          Integer.parseInt(textFields[3].getText())
+                      )
+              );
+          }
+      });
+      panel.add(smurfAbstractSmurfAddSmurfSmurfFactoryAbstractFactory);
+
+      return panel;
+  }
 }
