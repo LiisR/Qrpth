@@ -10,10 +10,24 @@
     <property name="source" value="1.7"/>
     <path id="POS.classpath">
         <pathelement location="bin"/>
-    	<pathelement location="lib/log4j-api-2.0.2.jar"/>
+        <pathelement location="lib/hsqldb.jar"/>
         <pathelement location="lib/log4j-core-2.0.2.jar"/>
+        <pathelement location="lib/hibernate/hibernate-ehcache-4.1.7.Final.jar"/>
+        <pathelement location="lib/hibernate/jboss-logging-3.1.0.GA.jar"/>
+        <pathelement location="lib/hibernate/javassist-3.15.0-GA.jar"/>
+        <pathelement location="lib/hibernate/slf4j-api-1.6.1.jar"/>
+        <pathelement location="lib/hibernate/hibernate-jpa-2.0-api-1.0.1.Final.jar"/>
+        <pathelement location="lib/hibernate/hibernate-commons-annotations-4.0.1.Final.jar"/>
+        <pathelement location="lib/hibernate/hibernate-core-4.1.7.Final.jar"/>
+        <pathelement location="lib/hibernate/jboss-transaction-api_1.1_spec-1.0.0.Final.jar"/>
+        <pathelement location="lib/hibernate/ehcache-core-2.4.3.jar"/>
+        <pathelement location="lib/hibernate/dom4j-1.6.1.jar"/>
+        <pathelement location="lib/hibernate/antlr-2.7.7.jar"/>
         <pathelement location="lib/jgoodies-looks-2.5.2.jar"/>
-        <pathelement location="lib/jgoodies-common-1.4.0.jar"/>
+        <pathelement location="lib/log4j-api-2.0.2.jar"/>
+        <pathelement location="lib/commons-logging-1.1.1.jar"/>
+        <pathelement location="lib/xml-apis.jar"/>
+        <pathelement location="lib/xercesImpl.jar"/>
         <pathelement location="."/>
     </path>
     <target name="init">
