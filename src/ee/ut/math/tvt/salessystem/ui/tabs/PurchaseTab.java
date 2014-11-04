@@ -1,5 +1,6 @@
 package ee.ut.math.tvt.salessystem.ui.tabs;
 
+import ee.ut.math.tvt.salessystem.domain.data.SoldItem;
 import ee.ut.math.tvt.salessystem.domain.exception.VerificationFailedException;
 import ee.ut.math.tvt.salessystem.domain.controller.SalesDomainController;
 import ee.ut.math.tvt.salessystem.ui.model.SalesSystemModel;
@@ -12,10 +13,14 @@ import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
  
+import java.util.List;
+
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JPanel;
  
+
+
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 
@@ -65,12 +70,23 @@ public class PurchaseTab {
     // Add the main purchase-panel
     purchasePane = new PurchaseItemPanel(model);
     panel.add(purchasePane, getConstraintsForPurchasePanel());
+    
+  //when sale is completed 
+    purchasePane.getConfirmButton().addActionListener(new ActionListener() { 
+            public void actionPerformed(ActionEvent e) {
+            	try {
+            	      domainController.cancelCurrentPurchase();
+            	      endSale();
+            	      model.getCurrentPurchaseTableModel().clear();
+            	    } catch (VerificationFailedException e1) {
+            	      log.error(e1.getMessage());
+            	    }
+               
+            }
+        });
 
     return panel;
   }
-
-
-
 
   // The purchase menu. Contains buttons "New purchase", "Submit", "Cancel".
   private Component getPurchaseMenuPane() {
@@ -89,7 +105,7 @@ public class PurchaseTab {
     panel.add(newPurchase, gc);
     panel.add(submitPurchase, gc);
     panel.add(cancelPurchase, gc);
-
+    
     return panel;
   }
 
@@ -169,19 +185,28 @@ public class PurchaseTab {
 
   /** Event handler for the <code>submit purchase</code> event. */
   protected void submitPurchaseButtonClicked() {
-    log.info("Sale complete");
+    log.info("Purchase conformation started!");
+    
     try {
+    	List<SoldItem> purchaseItems = model.getCurrentPurchaseTableModel().getTableRows();
       log.debug("Contents of the current basket:\n" + model.getCurrentPurchaseTableModel());
-      domainController.submitCurrentPurchase(
-          model.getCurrentPurchaseTableModel().getTableRows()
-      );
+      if(!purchaseItems.isEmpty()){
+    	  double sum = 0;
+    	  for (SoldItem a: purchaseItems) { //find the total sum of purchased items
+    		  sum = sum + a.getSum();
+    		  }
+    	  purchasePane.setOrderSumField(sum);	//set sum of the purchase to orderSumField 
+    	  purchasePane.getComponents()[1].setVisible(true);
+      }
+      
+      
+      domainController.submitCurrentPurchase(purchaseItems);
       endSale();
       model.getCurrentPurchaseTableModel().clear();
     } catch (VerificationFailedException e1) {
       log.error(e1.getMessage());
     }
   }
-
 
 
   /* === Helper methods that bring the whole purchase-tab to a certain state
@@ -207,8 +232,7 @@ public class PurchaseTab {
     newPurchase.setEnabled(true);
     purchasePane.setEnabled(false);
   }
-
-
+  
 
 
   /* === Next methods just create the layout constraints objects that control the
