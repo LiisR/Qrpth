@@ -28,7 +28,7 @@
         <pathelement location="lib/log4j-api-2.0.2.jar"/>
         <pathelement location="lib/commons-logging-1.1.1.jar"/>
         <pathelement location="lib/xml-apis.jar"/>
-        <pathelement location="lib/xercesImpl.jar"/>
+        <pathelement location="lib/xercesImpl.jar"/> 
         <pathelement location="."/>
     </path>
     <property name="lib.dir" value="${basedir}/lib"/>

@@ -205,7 +205,7 @@ public class PurchaseTab {
       model.getCurrentPurchaseTableModel().clear();
     } catch (VerificationFailedException e1) {
       log.error(e1.getMessage());
-    }
+    } 
   }
 
 

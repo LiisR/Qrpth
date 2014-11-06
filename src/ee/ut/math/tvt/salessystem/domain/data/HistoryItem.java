@@ -39,7 +39,7 @@ public class HistoryItem implements Cloneable, DisplayableItem{
 	    }
 	    
 	    public Long getId() {
-			return id;
+			return id; 
 		}
 
 
