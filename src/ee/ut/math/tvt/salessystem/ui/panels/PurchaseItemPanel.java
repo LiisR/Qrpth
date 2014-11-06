@@ -50,7 +50,7 @@ public class PurchaseItemPanel extends JPanel {
 
     private JButton addItemButton;
     private JComboBox combobox;
-    
+     
     //Conformation panel textfields
     private JTextField orderSumField;
     private JTextField paymentField;

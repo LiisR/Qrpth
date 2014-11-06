@@ -21,7 +21,7 @@ public class SalesSystemModel {
     private HistoryTableModel historyTableModel;
 
     private final SalesDomainController domainController;
-
+ 
     /**
      * Construct application model.
      * @param domainController Sales domain controller.

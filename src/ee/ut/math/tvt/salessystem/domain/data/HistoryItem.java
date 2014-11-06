@@ -14,7 +14,7 @@ public class HistoryItem implements Cloneable, DisplayableItem{
 	    private Long id;
 	    
 	    private List<SoldItem> soldItem;
-	    
+	     
 	    private double TotalPrice;
 	    private double index;
 	    

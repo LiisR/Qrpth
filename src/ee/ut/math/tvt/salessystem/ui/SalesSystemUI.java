@@ -36,7 +36,7 @@ public class SalesSystemUI extends JFrame {
   private SalesSystemModel model;
 
   // Instances of tab classes
-  private PurchaseTab purchaseTab;
+  private PurchaseTab purchaseTab; 
   private HistoryTab historyTab;
   private StockTab stockTab;
 

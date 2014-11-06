@@ -28,7 +28,7 @@ public class HistoryTableModel extends SalesSystemTableModel<HistoryItem> {
             }
             throw new IllegalArgumentException("Column index out of range");
     }
-
+ 
 	public List<HistoryItem> getHistoryItemsList() {
 		return historyItemsList;
 	}

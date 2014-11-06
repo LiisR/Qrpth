@@ -150,7 +150,7 @@ public class PurchaseTab {
   }
 
 
-
+ 
 
 
   /* === Event handlers for the menu buttons

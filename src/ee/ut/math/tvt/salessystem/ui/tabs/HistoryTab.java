@@ -65,7 +65,7 @@ public class HistoryTab {
         panel.add(drawHistoryMainPane(), gc);
         
         return panel;
-    }
+    } 
     
     private Component drawHistoryMenuPane() {
         final JPanel panel = new JPanel();

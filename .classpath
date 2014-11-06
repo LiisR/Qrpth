@@ -24,3 +24,4 @@
 	<classpathentry kind="lib" path="lib/jgoodies-common-1.4.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
+ 
