@@ -1,15 +1,22 @@
 package ee.ut.math.tvt.salessystem.ui.model;
 
-/*import ee.ut.math.tvt.qrpth.domain.data.MYYDUD
 
-public class HistoryTableModel extends SalesSystemTableModel {
+import java.util.List;
+
+import ee.ut.math.tvt.salessystem.domain.data.DisplayableItem;
+import ee.ut.math.tvt.salessystem.domain.data.HistoryItem;
+import ee.ut.math.tvt.salessystem.domain.data.SoldItem;
+
+public class HistoryTableModel extends SalesSystemTableModel<HistoryItem> {
+	
+	private List <HistoryItem> historyItemsList;
 	
 	public HistoryTableModel () {
-		super(new String[] {"Date", "Time" "Sum"});
+		super(new String[] {"Date", "Time", "Sum"});
 	}
 
     @Override
-    protected Object getColumnValue(Item item, int columnIndex) {
+    protected Object getColumnValue(HistoryItem item, int columnIndex) {
             switch (columnIndex) {
             case 0:
                     return item.getDateAsStrig();
@@ -21,7 +28,13 @@ public class HistoryTableModel extends SalesSystemTableModel {
             throw new IllegalArgumentException("Column index out of range");
     }
 
+	public List<HistoryItem> getHistoryItemsList() {
+		return historyItemsList;
+	}
+
+	public void setHistoryItemsList(List<HistoryItem> historyItemsList) {
+		this.historyItemsList = historyItemsList;
+	}
 
 
 }
-*/

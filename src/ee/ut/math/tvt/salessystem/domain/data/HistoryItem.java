@@ -12,13 +12,17 @@ import java.util.List;
 public class HistoryItem implements Cloneable, DisplayableItem{
 
 	    private Long id;
+	    
 	    private List<SoldItem> soldItem;
 	    
-	    private double price;
+	    private double TotalPrice;
 	    private double index;
 	    
-	    private String date;
-	    private String time;
+	    private String name;
+	    
+	    private String DateAsStrig;
+	    private String TimeAsString;
+	    
 	    
 	    
 	    public HistoryItem(List<SoldItem> soldItem, int index) {
@@ -29,24 +33,27 @@ public class HistoryItem implements Cloneable, DisplayableItem{
 	        DateFormat timeFormat = new SimpleDateFormat("h:mm a");
 	        
 	        Date purTime = new Date();
-	        date = dateFormat.format(purTime);
-	        time = timeFormat.format(purTime);
+	        DateAsStrig = dateFormat.format(purTime);
+	        TimeAsString = timeFormat.format(purTime);
 	        
 	    }
-
-
-		public Long getId() {
+	    
+	    public Long getId() {
 			return id;
 		}
+
 
 
 		public void setId(Long id) {
 			this.id = id;
 		}
 
+
+
 		public List<SoldItem> getSoldItem() {
 			return soldItem;
 		}
+
 
 
 		public void setSoldItem(List<SoldItem> soldItem) {
@@ -54,14 +61,17 @@ public class HistoryItem implements Cloneable, DisplayableItem{
 		}
 
 
-		public double getPrice() {
-			return price;
+
+		public double getTotalPrice() {
+			return TotalPrice;
 		}
 
 
-		public void setPrice(double price) {
-			this.price = price;
+
+		public void setTotalPrice(double totalPrice) {
+			TotalPrice = totalPrice;
 		}
+
 
 
 		public double getIndex() {
@@ -69,36 +79,49 @@ public class HistoryItem implements Cloneable, DisplayableItem{
 		}
 
 
+
 		public void setIndex(double index) {
 			this.index = index;
 		}
 
 
-		public String getDate() {
-			return date;
-		}
 
-
-		public void setDate(String date) {
-			this.date = date;
-		}
-
-
-		public String getTime() {
-			return time;
-		}
-
-
-		public void setTime(String time) {
-			this.time = time;
-		}
-
-
-		@Override
 		public String getName() {
-			// TODO Auto-generated method stub
-			return null;
+			return name;
 		}
+
+
+
+		public void setName(String name) {
+			this.name = name;
+		}
+
+
+		public String getDateAsStrig() {
+			return DateAsStrig;
+		}
+
+
+
+		public void setDateAsStrig(String dateAsStrig) {
+			DateAsStrig = dateAsStrig;
+		}
+
+
+
+		public String getTimeAsString() {
+			return TimeAsString;
+		}
+
+
+
+		public void setTimeAsString(String timeAsString) {
+			TimeAsString = timeAsString;
+		}
+
+
+
+		
 
 
 }
