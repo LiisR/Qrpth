@@ -10,7 +10,9 @@ import ee.ut.math.tvt.salessystem.ui.model.PurchaseInfoTableModel;
 
 public class HistoryTableModel extends SalesSystemTableModel<HistoryItem> {
 	
-	private List <HistoryItem> historyItemsList;
+	private static final long serialVersionUID = 1L;
+	
+	
 	
 	public HistoryTableModel () {
 		super(new String[] {"Date", "Time", "Sum"});
@@ -29,13 +31,7 @@ public class HistoryTableModel extends SalesSystemTableModel<HistoryItem> {
             throw new IllegalArgumentException("Column index out of range");
     }
  
-	public List<HistoryItem> getHistoryItemsList() {
-		return historyItemsList;
-	}
-
-	public void setHistoryItemsList(List<HistoryItem> historyItemsList) {
-		this.historyItemsList = historyItemsList;
-	}
+	
 	
 	public void addItem(final HistoryItem historyItem) {
         /**
@@ -46,6 +42,11 @@ public class HistoryTableModel extends SalesSystemTableModel<HistoryItem> {
         rows.add((HistoryItem) historyItem);
         //log.debug("Added " + item.getName() + " quantity of " + item.getQuantity());
         fireTableDataChanged();
+    }
+	
+	public void viewItem(List <HistoryItem> historyItem) {
+		historyItem.get(0).getTimeAsString();
+        
     }
 	
 

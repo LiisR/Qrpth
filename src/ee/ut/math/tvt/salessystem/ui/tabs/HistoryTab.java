@@ -6,22 +6,16 @@ import java.awt.Dialog;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.List;
 
 import javax.swing.BorderFactory;
-import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JFormattedTextField;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JTextField;
 import javax.swing.table.JTableHeader;
 
 import ee.ut.math.tvt.salessystem.domain.data.HistoryItem;
@@ -89,7 +83,7 @@ public class HistoryTab {
     private Component drawHistoryMainPane() {
         JPanel panel = new JPanel();
 
-        JTable table = new JTable(model.getHistoryTableModel()); 
+        final JTable table = new JTable(model.getHistoryTableModel()); 
 
         JTableHeader header = table.getTableHeader();
         header.setReorderingAllowed(false);
@@ -112,9 +106,19 @@ public class HistoryTab {
 	    	  public void mouseClicked(MouseEvent e){
 	    		  if(e.getClickCount() > 0){ 
 	    			  
-	    			  //HistoryItem historyItem = model.getHistoryTableModel().getItemById((long)table.getValueAt(table.getSelectedRow(), 0));
-	    			  
-	    			  
+	    			  if(model.getHistoryTableModel().getColumnCount() > 0){
+	    				  //List <HistoryItem> historyItemList = model.getHistoryTableModel().getTableRows(); //selected items purchase list
+	    				  
+	    				  //model.getHistoryTableModel().getTableRows().get(0).getSoldItem().get(0).getName(); //selected items purchase list
+	    				  
+	    				  
+	    				  
+	    				  //historyItemList..get(0).getDateAsStrig();
+	    				
+	    			  //HistoryItem historyItem = (HistoryItem)model.getHistoryTableModel().getHistoryItemsList().get(table.getSelectedRow()); //selected items purchase list
+	    			  //SoldItem soldItem = (SoldItem) historyItem.getSoldItem();
+	    			  System.out.println(model.getHistoryTableModel().getTableRows().get(0).getSoldItem().size());
+	    			  }
 	    			  JDialog dialog = new JDialog((Dialog)null, "Product information", true);
 	    			  
 	    	          dialog.add(drawProductInfoPopup());
@@ -122,8 +126,6 @@ public class HistoryTab {
 	    	          Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
 	    	          dialog.setLocation((screen.width - 360) / 2, (screen.height - 240) / 2);
 	    	          dialog.setVisible(true);
-	    			  
-	    			  
 	    		  }
 	    	  }
 	      });
@@ -141,7 +143,7 @@ public class HistoryTab {
         
         //JTable table = new JTable(model.getCurrentPurchaseTableModel());
         
-        JTable table = new JTable(model.getCurrentPurchaseTableModel());
+        JTable table = new JTable(model.getHistoryInfoTableModel());
         JScrollPane scrollPane = new JScrollPane(table);
 
         panel.add(scrollPane, getProductInfoPopupConstraints());
