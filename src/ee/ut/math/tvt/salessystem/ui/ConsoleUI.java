@@ -108,7 +108,7 @@ public class ConsoleUI {
 		if (c[0].equals("h"))
 			printUsage();
 		else if (c[0].equals("q")){
-			//dc.endSession();
+			dc.endSession();
 			System.exit(0);
 		}
 		else if (c[0].equals("w"))

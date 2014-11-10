@@ -111,13 +111,9 @@ public class HistoryTab {
 	    				  
 	    				  //model.getHistoryTableModel().getTableRows().get(0).getSoldItem().get(0).getName(); //selected items purchase list
 	    				  
-	    				  
-	    				  
-	    				  //historyItemList..get(0).getDateAsStrig();
-	    				
 	    			  //HistoryItem historyItem = (HistoryItem)model.getHistoryTableModel().getHistoryItemsList().get(table.getSelectedRow()); //selected items purchase list
 	    			  //SoldItem soldItem = (SoldItem) historyItem.getSoldItem();
-	    			  System.out.println(model.getHistoryTableModel().getTableRows().get(0).getSoldItem().size());
+	    			  //System.out.println(model.getHistoryTableModel().getTableRows().get(0).getSoldItem().size());
 	    			  }
 	    			  JDialog dialog = new JDialog((Dialog)null, "Product information", true);
 	    			  

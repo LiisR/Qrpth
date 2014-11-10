@@ -32,10 +32,10 @@ public class HistoryItem implements Cloneable, DisplayableItem{
 	    private Long id;
 	
 		@OneToMany
-		  @JoinTable(name="SOLD_AND_HISTORY",
-		      joinColumns=@JoinColumn(name="HISTORY_ID", referencedColumnName="HISTORY_ID"),
-		      inverseJoinColumns=@JoinColumn(name="SOLDITEM_ID", referencedColumnName="SOLDITEM_ID"))
-		
+			@JoinTable(name= "HISTORYITEM_SOLDITEM", 
+				joinColumns = @JoinColumn (name = "HISTORYITEM_ID", referencedColumnName = "ID"),
+				inverseJoinColumns = @JoinColumn(name = "SOLDITEM_ID", referencedColumnName = "ID")
+		)
 	    private List<SoldItem> soldItem;
 	     
 	    @Column(name = "TOTALPRICE")
