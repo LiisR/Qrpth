@@ -5,6 +5,7 @@ import ee.ut.math.tvt.salessystem.domain.data.SoldItem;
 import ee.ut.math.tvt.salessystem.domain.data.StockItem;
 import ee.ut.math.tvt.salessystem.ui.model.SalesSystemModel;
 import ee.ut.math.tvt.salessystem.ui.tabs.PurchaseTab;
+import ee.ut.math.tvt.salessystem.util.HibernateUtil;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -30,6 +31,7 @@ import javax.swing.event.DocumentListener;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.hibernate.Session;
 
 
 /**
@@ -283,15 +285,25 @@ public class PurchaseItemPanel extends JPanel {
 	public void acceptPurchaseEventHandler(){
 		log.info("Payment started");
 		
+		Session historySession = HibernateUtil.currentSession(); //
+		historySession.beginTransaction();
+		
 		// Save items as HistoryItem		
 		List<SoldItem> purchaseItems = model.getCurrentPurchaseTableModel().getTableRows();
 		
-		long count = (long)model.getHistoryTableModel().getRowCount();
-		HistoryItem historyItem = new HistoryItem(purchaseItems); //if more than one purchase then we have to check the id
-		historyItem.setTotalPrice(Double.parseDouble(orderSumField.getText()));
+		HistoryItem historyItem = new HistoryItem(purchaseItems,Double.parseDouble(orderSumField.getText())); //if more than one purchase then we have to check the id
 		model.getHistoryTableModel().addItem(historyItem);
 		
+		historySession.persist(historyItem);
 		
+		//change purchased items quantities in warehouse
+		for(SoldItem items : purchaseItems){
+			StockItem stockitem = (StockItem) historySession.get(StockItem.class, items.getStockItem().getId());
+			stockitem.setQuantity(stockitem.getQuantity()- items.getQuantity());
+			}
+						
+		//end session
+		historySession.getTransaction().commit();
 														
 		// End sale
 		log.info("Sale completed");

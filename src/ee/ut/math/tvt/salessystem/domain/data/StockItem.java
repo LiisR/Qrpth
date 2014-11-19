@@ -22,12 +22,12 @@ public class StockItem implements Cloneable, DisplayableItem {
 	@Column(name = "PRICE")
     private double price;
 
+	@Column(name = "QUANTITY")
+    private int quantity;
+	
 	@Column(name = "DESCRIPTION")
     private String description;
     
-	@Column(name = "QUANTITY")
-    private int quantity;
-
     /**
      * Constucts new <code>StockItem</code> with the specified values.
      * @param id barcode id

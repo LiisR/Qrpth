@@ -1,7 +1,9 @@
 package ee.ut.math.tvt.salessystem.ui.tabs;
 
 import ee.ut.math.tvt.salessystem.ui.model.SalesSystemModel;
+import ee.ut.math.tvt.salessystem.util.HibernateUtil;
 import ee.ut.math.tvt.salessystem.domain.data.StockItem;
+
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.Color;
@@ -11,6 +13,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -21,8 +24,12 @@ import javax.swing.JDialog;
 import javax.swing.JTextField;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
+
 import java.text.DecimalFormat;
+
 import javax.swing.text.NumberFormatter;
+
+import org.hibernate.Session;
 
 public class StockTab {
 
@@ -158,15 +165,24 @@ public class StockTab {
       JButton smurfAbstractSmurfAddSmurfSmurfFactoryAbstractFactory = new JButton("Add");
       smurfAbstractSmurfAddSmurfSmurfFactoryAbstractFactory.addActionListener(new ActionListener() {
           public void actionPerformed(ActionEvent e) {
-              model.getWarehouseTableModel().addItem(
-                      new StockItem(
-                          Long.parseLong(textFields[0].getText()),
-                          textFields[1].getText(),
-                          "",
-                          Double.parseDouble(textFields[2].getText()),
-                          Integer.parseInt(textFields[3].getText())
-                      )
-              );
+        	  Session stockSession = HibernateUtil.currentSession(); //
+        	  stockSession.beginTransaction();
+      		  
+        	  StockItem newItem = new StockItem(
+                      Long.parseLong(textFields[0].getText()),
+                      textFields[1].getText(),
+                      "",
+                      Double.parseDouble(textFields[2].getText()),
+                      Integer.parseInt(textFields[3].getText())
+                  );
+              model.getWarehouseTableModel().addItem(newItem);
+              
+              //add stockItem/newItem to database
+              stockSession.persist(newItem);
+      		
+      		//end session
+              stockSession.getTransaction().commit();
+              
           }
       });
       panel.add(smurfAbstractSmurfAddSmurfSmurfFactoryAbstractFactory);

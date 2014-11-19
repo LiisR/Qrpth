@@ -35,7 +35,7 @@ public class HistoryItem implements Cloneable, DisplayableItem{
 	    private List<SoldItem> soldItem;
 	     
 	    @Column(name = "TOTALPRICE")
-	    private double TotalPrice;
+	    private double totalPrice;
 	    
 	    
 	    @Column(name = "DATE")
@@ -44,10 +44,9 @@ public class HistoryItem implements Cloneable, DisplayableItem{
 	    @Column(name = "TIME")
 	    private String TimeAsString;
 	    
-	    public HistoryItem(List<SoldItem> soldItem) {
+	    public HistoryItem(List<SoldItem> soldItem, double totalPrice) {
 	        this.soldItem = soldItem;
-	        
-	        //this.id = id;
+	        this.totalPrice = totalPrice;
 	        
 	        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 	        DateFormat timeFormat = new SimpleDateFormat("h:mm a");
@@ -56,6 +55,9 @@ public class HistoryItem implements Cloneable, DisplayableItem{
 	        DateAsStrig = dateFormat.format(purTime);
 	        TimeAsString = timeFormat.format(purTime);
 	        
+	    }
+	    
+	    public HistoryItem() {
 	    }
 	    
 	    public Long getId() {
@@ -83,13 +85,13 @@ public class HistoryItem implements Cloneable, DisplayableItem{
 
 
 		public double getTotalPrice() {
-			return TotalPrice;
+			return totalPrice;
 		}
 
 
 
 		public void setTotalPrice(double totalPrice) {
-			TotalPrice = totalPrice;
+			this.totalPrice = totalPrice;
 		}
 
 
