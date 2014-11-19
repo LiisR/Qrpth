@@ -287,7 +287,7 @@ public class PurchaseItemPanel extends JPanel {
 		List<SoldItem> purchaseItems = model.getCurrentPurchaseTableModel().getTableRows();
 		
 		long count = (long)model.getHistoryTableModel().getRowCount();
-		HistoryItem historyItem = new HistoryItem(purchaseItems,count); //if more than one purchase then we have to check the id
+		HistoryItem historyItem = new HistoryItem(purchaseItems); //if more than one purchase then we have to check the id
 		historyItem.setTotalPrice(Double.parseDouble(orderSumField.getText()));
 		model.getHistoryTableModel().addItem(historyItem);
 		

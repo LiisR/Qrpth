@@ -30,6 +30,14 @@ public class SalesDomainControllerImpl implements SalesDomainController {
 		// XXX - Start new purchase
 	}
 
+	
+	public List<StockItem> loadWarehouseState() {
+		@SuppressWarnings("unchecked")
+		List<StockItem> dataset = HibernateUtil.currentSession().createQuery("from StockItem").list();
+		return dataset;
+		}
+	
+	/*
 	public List<StockItem> loadWarehouseState() {
 		// XXX mock implementation
 		List<StockItem> dataset = new ArrayList<StockItem>();
@@ -47,7 +55,7 @@ public class SalesDomainControllerImpl implements SalesDomainController {
 
 		return dataset;
 	}
-	
+	*/
 	public void endSession() {
 	    HibernateUtil.closeSession();
 	}

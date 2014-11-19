@@ -31,11 +31,7 @@ public class HistoryItem implements Cloneable, DisplayableItem{
 		@GeneratedValue(strategy = GenerationType.IDENTITY)
 	    private Long id;
 	
-		@OneToMany
-			@JoinTable(name= "HISTORYITEM_SOLDITEM", 
-				joinColumns = @JoinColumn (name = "HISTORYITEM_ID", referencedColumnName = "ID"),
-				inverseJoinColumns = @JoinColumn(name = "SOLDITEM_ID", referencedColumnName = "ID")
-		)
+		@OneToMany(mappedBy = "historyitem")
 	    private List<SoldItem> soldItem;
 	     
 	    @Column(name = "TOTALPRICE")
@@ -48,10 +44,10 @@ public class HistoryItem implements Cloneable, DisplayableItem{
 	    @Column(name = "TIME")
 	    private String TimeAsString;
 	    
-	    public HistoryItem(List<SoldItem> soldItem, long id) {
+	    public HistoryItem(List<SoldItem> soldItem) {
 	        this.soldItem = soldItem;
 	        
-	        this.id = id;
+	        //this.id = id;
 	        
 	        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 	        DateFormat timeFormat = new SimpleDateFormat("h:mm a");
