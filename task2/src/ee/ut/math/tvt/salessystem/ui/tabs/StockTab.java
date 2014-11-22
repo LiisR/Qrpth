@@ -189,4 +189,7 @@ public class StockTab {
         }
     }
 
+    public void refresh() {
+        model.reloadStockTableModel();
+    }
 }

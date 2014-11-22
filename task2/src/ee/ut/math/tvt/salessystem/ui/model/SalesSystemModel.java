@@ -23,12 +23,15 @@ public class SalesSystemModel {
     private ClientTableModel clientTableModel;
 
     private Client selectedClient;
+    
+    private SalesDomainController domainController;
 
     /**
      * Construct application model.
      * @param domainController Sales domain controller.
      */
     public SalesSystemModel(SalesDomainController domainController) {
+        this.domainController = domainController;
 
         warehouseTableModel = new StockTableModel();
         currentPurchaseTableModel = new PurchaseInfoTableModel(this);
@@ -46,6 +49,21 @@ public class SalesSystemModel {
         List<Sale> sales = domainController.getAllSales();
         purchaseHistoryTableModel.populateWithData(sales);
 
+    }
+
+    public void reloadStockTableModel() {
+        List<StockItem> stockItems = domainController.getAllStockItems();
+        warehouseTableModel.populateWithData(stockItems);
+    }
+
+    public void reloadClientTableModel() {
+        List<Client> clients = domainController.getAllClients();
+        clientTableModel.populateWithData(clients);
+    }
+
+    public void reloadPurchaseHistoryTableModel() {
+        List<Sale> sales = domainController.getAllSales();
+        purchaseHistoryTableModel.populateWithData(sales);
     }
 
     public StockTableModel getWarehouseTableModel() {

@@ -65,5 +65,8 @@ public class ClientTab {
         gc.weighty = 1.0;
         return gc;
     }    
-    
+
+    public void refresh() {
+        model.reloadClientTableModel();
+    }
 }

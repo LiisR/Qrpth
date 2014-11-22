@@ -16,6 +16,8 @@ import javax.swing.JTabbedPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import org.apache.log4j.Logger;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.ChangeEvent;
 
 /**
  * Graphical user interface of the sales system.
@@ -80,12 +82,22 @@ public class SalesSystemUI extends JFrame {
   }
 
   private void drawWidgets() {
-    JTabbedPane tabbedPane = new JTabbedPane();
+    final JTabbedPane tabbedPane = new JTabbedPane();
 
     tabbedPane.add("Point-of-sale", purchaseTab.draw());
     tabbedPane.add("Warehouse", stockTab.draw());
     tabbedPane.add("History", historyTab.draw());
     tabbedPane.add("Clients", clientTab.draw());
+
+    tabbedPane.addChangeListener(new ChangeListener() {
+        public void stateChanged(ChangeEvent e) {
+            switch (tabbedPane.getSelectedIndex()) {
+                case 1: stockTab.refresh(); break;
+                case 2: historyTab.refresh(); break;
+                case 3: clientTab.refresh(); break;
+            }
+        }
+    });
 
     getContentPane().add(tabbedPane);
   }

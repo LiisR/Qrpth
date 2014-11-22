@@ -113,5 +113,8 @@ public class HistoryTab {
         return gc;
     }
 
+    public void refresh() {
+        model.reloadPurchaseHistoryTableModel();
+    }
 }
 
