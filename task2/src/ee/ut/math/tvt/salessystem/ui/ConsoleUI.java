@@ -137,14 +137,9 @@ public class ConsoleUI {
             } catch (VerificationFailedException e) {
                 log.error(e.getMessage());
             }
-
         } else if (c[0].equals("r")) {
-
-            dc.cancelCurrentPurchase();
             cart.clear();
-
         } else if (c[0].equals("a") && c.length == 3) {
-
             int idx = Integer.parseInt(c[1]);
             int amount = Integer.parseInt(c[2]);
             StockItem item = getStockItemById(idx);
@@ -183,5 +178,4 @@ public class ConsoleUI {
         selectedClient = dc.getClient(clients.get(index - 1).getId());
         System.out.println("Selected client: " + selectedClient.getFirstName());
     }
-
 }

@@ -97,7 +97,6 @@ public class SalesDomainControllerImpl implements SalesDomainController {
 
     }
 
-
     public void createStockItem(StockItem stockItem) {
         // Begin transaction
         Transaction tx = session.beginTransaction();
@@ -106,19 +105,6 @@ public class SalesDomainControllerImpl implements SalesDomainController {
         model.getWarehouseTableModel().addRow(stockItem);
         log.info("Added new stockItem : " + stockItem);
     }
-
-
-    public void cancelCurrentPurchase() {
-        // XXX - Cancel current purchase
-        log.info("Current purchase canceled");
-    }
-
-    public void startNewPurchase() {
-        // XXX - Start new purchase
-        log.info("New purchase started");
-    }
-
-
 
     public void setModel(SalesSystemModel model) {
         this.model = model;

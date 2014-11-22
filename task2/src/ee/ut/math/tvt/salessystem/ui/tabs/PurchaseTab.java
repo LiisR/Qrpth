@@ -139,14 +139,12 @@ public class PurchaseTab {
     /** Event handler for the <code>new purchase</code> event. */
     protected void newPurchaseButtonClicked() {
         log.info("New sale process started");
-        domainController.startNewPurchase();
         startNewSale();
     }
 
     /** Event handler for the <code>cancel purchase</code> event. */
     protected void cancelPurchaseButtonClicked() {
         log.info("Sale cancelled");
-        domainController.cancelCurrentPurchase();
         endSale();
         model.getCurrentPurchaseTableModel().clear();
 
