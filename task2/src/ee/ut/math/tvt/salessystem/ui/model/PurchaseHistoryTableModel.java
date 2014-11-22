@@ -3,7 +3,7 @@ package ee.ut.math.tvt.salessystem.ui.model;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
-
+import java.util.ArrayList;
 
 import ee.ut.math.tvt.salessystem.domain.data.Sale;
 
@@ -17,8 +17,7 @@ public class PurchaseHistoryTableModel extends SalesSystemTableModel<Sale> {
 	private List<Sale> sales;
 	public PurchaseHistoryTableModel() {
 		super(new String[] { "Id", "Time", "Sum", "Client" });
-		
-	
+                sales = new ArrayList<Sale>();
 	}
 
 	@Override
@@ -62,6 +61,5 @@ public class PurchaseHistoryTableModel extends SalesSystemTableModel<Sale> {
 	@Override
 	public void clearTableRows() {
 		sales.clear();
-		
 	}
 }

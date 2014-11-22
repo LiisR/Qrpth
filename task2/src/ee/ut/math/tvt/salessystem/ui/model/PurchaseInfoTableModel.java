@@ -143,7 +143,6 @@ public class PurchaseInfoTableModel extends SalesSystemTableModel<SoldItem> {
      */
     public void showSale(Sale sale) {
     	this.sale=sale;
-       // this.rows = new ArrayList<SoldItem>(sale.getSoldItems());
         fireTableDataChanged();
     }
 
@@ -154,11 +153,6 @@ public class PurchaseInfoTableModel extends SalesSystemTableModel<SoldItem> {
 
 	@Override
 	public void clearTableRows() {
-		clear();
-		
+            sale = new Sale(new ArrayList<SoldItem>());
 	}
-
-
-
-
 }
