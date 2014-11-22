@@ -1,9 +1,7 @@
 package ee.ut.math.tvt.salessystem.domain.data;
 
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -73,11 +71,6 @@ public class Sale implements DisplayableItem {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public void addSoldItem(SoldItem item) {
-        item.setSale(this);
-        soldItems.add(item);
     }
 
     public double getSum() {
