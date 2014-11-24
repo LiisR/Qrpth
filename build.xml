@@ -39,6 +39,11 @@
     <property name="db.alias"   value="POS"/>
     <property name="db.url"     value="jdbc:hsqldb:hsql://localhost/POS"/>
     <property name="lib.hibernate.dir"   value="${lib.dir}/hibernate"/>
+              	
+              	
+    <property name="build.test.dir"       value="${build.dir}/test"/>
+    <property name="build.dir"            value="${basedir}/build"/>
+    <property name="test.dir"   value="${basedir}/test"/>
 
     <target name="dbmanager" description="Start the HSQLDB manager">
         <java
@@ -220,6 +225,54 @@
 			<arg value="https://${github_username}:${github_password}@github.com/LiisR/Qrpth.git"/>
 		</args>
 	</git>
+</target>
+              	
+<target name="build-tests" depends="build" description="Build the system">
+	<mkdir dir="${build.dir}"/>
+	<mkdir dir="${build.test.dir}"/>
+         		<javac
+                        srcdir="${test.dir}"
+                        destdir="${build.test.dir}"
+                        debug="true"
+                        debuglevel="lines,vars,source"
+                        encoding="utf-8"
+                        compiler="modern"
+                        target="1.5"
+                        source="1.5"
+         				includeantruntime="true"
+                    	classpathref="libs"
+                    >
+            			<classpath>
+            				<pathelement path="${build.classes.dir}" />
+            			</classpath>
+            		</javac>
+</target>
+
+ <path id="libs">
+            		<fileset dir="${lib.dir}">
+            			<include name="*.jar"/>
+            		</fileset>
+</path>
+<path id="test-classpath">
+            		<fileset dir="${lib.dir}">
+            			<include name="*.jar"/>
+            		</fileset>
+            	    <pathelement path="${build.classes.dir}/" />
+            		<pathelement path="${build.test.dir}/" />
+</path>
+              	
+ <target name="test" depends="build-tests" description="Run the template application">
+
+            		<junit>
+            			<classpath refid="test-classpath" />
+
+            			<formatter type="brief" usefile="false" />
+            			<batchtest>
+            				<fileset dir="${build.test.dir}" includes="**/*.class" />
+            			</batchtest>
+            		</junit>
+
+
 </target>
 	
 </project>
