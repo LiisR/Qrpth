@@ -25,7 +25,7 @@ public class StockItemTest {
     public void testClone() {
     	item2 = new StockItem();
     	item2 = (StockItem) item1.clone();
-    	assertEquals(item1.getPrice(),item2.getPrice(),0);
+    	assertEquals(item2.getPrice(),item1.getPrice(),0);
     }
 
 
@@ -33,7 +33,7 @@ public class StockItemTest {
     @Test
     public void testGetColumn() {
     	item1.setQuantity(45);
-    	assertEquals(item1.getColumn(3),45);
+    	assertEquals(45,item1.getColumn(3));
     }
 
     

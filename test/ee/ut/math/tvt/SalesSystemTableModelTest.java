@@ -8,7 +8,7 @@ import org.junit.Test;
 import ee.ut.math.tvt.salessystem.domain.data.StockItem;
 import ee.ut.math.tvt.salessystem.ui.model.StockTableModel;
 
-public class StockTableModelTest {
+public class SalesSystemTableModelTest {
 
 
   
@@ -28,32 +28,19 @@ public class StockTableModelTest {
     item1.setQuantity(1);
     
   }
-
-  @Test
-  public void testValidateNameUniqueness() {
-	  stModel.addItem(item1);
-	  stModel.addItem(item1);
-	  assertEquals("rumm",stModel.getItemById(1).getName());
-  }
   
-  // TODO
-  @Test
-  public void testHasEnoughInStock() {
-
-	  assertEquals(true,item1.getQuantity()>0);
-  }
   
   @Test
-  public void testGetItemByIdWhenItemExists() {
-	  	//sstModel = new SalesSystemTableModel();
+  public void testGetItemByName() {
 	  stModel.addItem(item1);
-	  assertEquals("rumm",stModel.getItemById(1).getName());
+	  assertEquals(1,stModel.getItemByName("rumm").getId(),0);
 	  
   }
   
   @Test(expected = java.util.NoSuchElementException.class)
-  public void testGetItemByIdWhenThrowsException() {
-	  assertEquals("rumm",stModel.getItemById(1).getName());
+  public void testGetItemByNameThrowsException() {
+	  stModel.addItem(item1);
+	  assertEquals(1,stModel.getItemByName("rumm1").getId(),0);
 	  
   }
 

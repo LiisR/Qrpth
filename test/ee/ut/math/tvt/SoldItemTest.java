@@ -25,14 +25,14 @@ public SoldItem soldItem1;
   @Test
   public void testGetSum() {
 	  soldItem1 = new SoldItem(item1, 3);
-	  assertEquals(soldItem1.getSum(),59.97,0);
+	  assertEquals(59.97,soldItem1.getSum(),0);
   }
   
   // TODO
   @Test
   public void testGetSumWithZeroQuantity() {
 	  soldItem1 = new SoldItem(item1,0);
-	  assertEquals(soldItem1.getSum(),0,0);
+	  assertEquals(0,soldItem1.getSum(),0);
   }
 
 
